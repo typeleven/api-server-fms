@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 // @index: import ${variable} from ${relpath};
 import app from './app';
 // /index
