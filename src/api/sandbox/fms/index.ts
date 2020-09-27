@@ -12,19 +12,19 @@ const instance = axios.create();
 
 router.use(services.filemaker.addFmsClient);
 
-router.get('/redirect/:name', async (req: any, res) => {
-    const client = req.locals.filemaker;
-    try {
-        const result = await client.find(
-            'Data',
-            { Name: req.params.name },
-            { limit: 1 }
-        );
-        res.redirect(result.data[0].fieldData.Image);
-    } catch (error) {
-        res.status(error.code).send(error);
-    }
-});
+// router.get('/redirect/:name', async (req: any, res) => {
+//     const client = req.locals.filemaker;
+//     try {
+//         const result = await client.find(
+//             'Data',
+//             { Name: req.params.name },
+//             { limit: 1 }
+//         );
+//         res.redirect(result.data[0].fieldData.Image);
+//     } catch (error) {
+//         res.status(error.code).send(error);
+//     }
+// });
 
 router.get('/get/:name', async (req: any, res) => {
     const client = req.locals.filemaker;
@@ -34,6 +34,8 @@ router.get('/get/:name', async (req: any, res) => {
             { Name: req.params.name },
             { limit: 1 }
         );
+
+        if (!result?.data[0]?.fieldData?.Image) return res.boom.notFound();
 
         const url = result.data[0].fieldData.Image;
 
