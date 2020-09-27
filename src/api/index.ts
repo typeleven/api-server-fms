@@ -1,10 +1,12 @@
 import express from 'express';
+import sandbox from './sandbox';
+import health from './health';
 
 const router = express.Router();
 
-router.get('/', require('./health'));
+router.get('/', health);
 
-router.use('/health', require('./health'));
-router.use('/sandbox', require('./sandbox'));
+router.use('/health', health);
+router.use('/sandbox', sandbox);
 
 export default router;

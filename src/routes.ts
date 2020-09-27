@@ -1,14 +1,15 @@
-import { validation } from './services';
+import services from './services';
 import { Application } from 'express';
+import health from './api/health';
 
-const { errors } = validation;
+const { errors } = services.validation;
 
 import api from './api';
 
 // base routes for the server
 
 export default (app: Application) => {
-    app.use('/', require('./api/health'));
+    app.use('/', health);
 
     app.use('/api', api);
 

@@ -1,10 +1,13 @@
 import express, { RequestHandler } from 'express';
+import fms from './fms';
 import { celebrate, Joi } from 'celebrate';
 
 const router = express.Router();
 
 const response: RequestHandler = (req, res) =>
     res.json({ message: 'Validation Passed' });
+
+router.use('/fms', fms);
 
 router.get('/', (req, res) =>
     res.json({
@@ -25,4 +28,4 @@ router.post(
     response
 );
 
-module.exports = router;
+export default router;
