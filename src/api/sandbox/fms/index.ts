@@ -1,14 +1,8 @@
-import express, { Response } from 'express';
+import express from 'express';
 import services from '../../../services';
-import axios from 'axios';
-import axiosCookieJarSupport from 'axios-cookiejar-support';
-import tough from 'tough-cookie';
 const router = express.Router();
 
-axiosCookieJarSupport(axios);
-const cookieJar = new tough.CookieJar();
-
-const instance = axios.create();
+const { pipeContainerUrl } = services.filemaker;
 
 router.use(services.filemaker.addFmsClient);
 
@@ -25,12 +19,7 @@ router.get('/get/:name', async (req: any, res) => {
 
         const url = result.data[0].fieldData.Image;
 
-        const response = await instance.get(url, {
-            jar: cookieJar,
-            responseType: 'stream',
-            withCredentials: true,
-        });
-        response.data.pipe(res);
+        pipeContainerUrl(url, res);
     } catch (error) {
         res.status(error.code).send(error);
     }

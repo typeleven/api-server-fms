@@ -1,8 +1,28 @@
 const { Filemaker } = require('fms-api-client');
 import config from '../config';
-import { RequestHandler } from 'express';
+import { RequestHandler, Response } from 'express';
+import tough from 'tough-cookie';
+import axios from 'axios';
+import axiosCookieJarSupport from 'axios-cookiejar-support';
+axiosCookieJarSupport(axios);
+
+const cookieJar = new tough.CookieJar();
+const instance = axios.create();
 
 const { filemaker } = config;
+
+const pipeContainerUrl = async (url: string, res: Response) => {
+    try {
+        const response = await instance.get(url, {
+            jar: cookieJar,
+            responseType: 'stream',
+            withCredentials: true,
+        });
+        return response.data.pipe(res);
+    } catch (error) {
+        return new Error();
+    }
+};
 
 const addFmsClient: RequestHandler = async (req: any, res, next) => {
     try {
@@ -25,4 +45,4 @@ const addFmsClient: RequestHandler = async (req: any, res, next) => {
     }
 };
 
-export default { addFmsClient, Filemaker };
+export default { addFmsClient, Filemaker, pipeContainerUrl };
