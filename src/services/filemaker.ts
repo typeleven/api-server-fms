@@ -7,12 +7,12 @@ const { filemaker } = config;
 const addFmsClient: RequestHandler = async (req: any, res, next) => {
     try {
         let client = await Filemaker.findOne({
-            'agent.connection.server': config.filemaker.server,
-            'agent.connection.database': config.filemaker.database,
+            'agent.connection.server': filemaker.server,
+            'agent.connection.database': filemaker.database,
         });
 
         if (!client) {
-            client = await Filemaker.create(config.filemaker);
+            client = await Filemaker.create(filemaker);
             await client.save();
         }
 

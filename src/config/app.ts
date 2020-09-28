@@ -6,6 +6,8 @@ const app = {
     parameterLimit: Number(process.env.API_PARAMETER_LIMIT) || 10000,
 
     datastore: process.env.DATASTORE,
+
+    apiKey: process.env.API_KEY,
 };
 
 export default app;
