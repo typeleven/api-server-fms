@@ -7,7 +7,7 @@ const app = {
     apiKey: process.env.API_KEY,
     logglyApiKey: process.env.LOGGLY_API_KEY,
     logglySubdomain: process.env.LOGGLY_SUBDOMAIN,
-    serverName: process.env.SERVER_NAME,
+    serverName: process.env.SERVER_NAME || 'api-server-fms',
 };
 
 export default app;

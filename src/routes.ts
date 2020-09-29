@@ -1,7 +1,7 @@
+import config from './config';
 import services from './services';
 import { Application } from 'express';
 import cors from 'cors';
-import config from './config';
 
 const { errors } = services.validation;
 const { rateLimiterGlobal } = services.rateLimit;
@@ -13,9 +13,11 @@ import api from './api';
 export default (app: Application) => {
     app.use(cors());
 
-    app.use('/', (req, res) => res.send({ message: 'API Server' }));
+    app.use(services.responseTime);
 
     app.use('/api', api);
+
+    app.use('/', (req, res) => res.send({ message: 'API Server' }));
 
     config.app.env !== 'development'
         ? app.use(rateLimiterGlobal)

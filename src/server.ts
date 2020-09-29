@@ -16,7 +16,6 @@ const start = async () => {
         await connect(datastore);
         app.listen(port);
         console.log(`🤖 Port ${chalk.red(port)} | ${chalk.blue(env)}`);
-        logger('info', `Server Started on Port ${port}`);
     } catch (error) {
         console.log(error);
     }

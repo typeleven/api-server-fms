@@ -21,3 +21,9 @@ const logger = (level: string, message: string | object) => {
 };
 
 export default logger;
+
+// logger('critical', 'example error log');
+// logger('error', 'example error log');
+// logger('warn', 'example warning log');
+// logger('info', 'example info log');
+// logger('debug', 'example debug log');
