@@ -5,6 +5,9 @@ const app = {
     parameterLimit: Number(process.env.API_PARAMETER_LIMIT) || 10000,
     datastore: process.env.DATASTORE,
     apiKey: process.env.API_KEY,
+    logglyApiKey: process.env.LOGGLY_API_KEY,
+    logglySubdomain: process.env.LOGGLY_SUBDOMAIN,
+    serverName: process.env.SERVER_NAME,
 };
 
 export default app;
