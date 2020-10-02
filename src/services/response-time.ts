@@ -2,11 +2,13 @@ import responseTime from 'response-time';
 import { compose } from 'compose-middleware';
 import logger from './logger';
 
+const { sendLog } = logger;
+
 const requestTimeLogger = compose([
     responseTime((req: any, res, time) => {
         // log request that take  more than 500ms
         if (time > 500)
-            logger('warn', {
+            sendLog('warn', {
                 time,
                 message: 'Response Time Log',
                 ip: req.ip,

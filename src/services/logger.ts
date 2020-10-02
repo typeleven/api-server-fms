@@ -1,18 +1,26 @@
 import winston from 'winston';
 import { Loggly } from 'winston-loggly-bulk';
 import config from '../config';
+import axios from 'axios';
+import { Response } from 'express';
+
+const { logglyUsername, logglyPassword, logglySubdomain, env } = config.app;
 
 winston.add(
     new Loggly({
         token: config.app.logglyApiKey!,
         subdomain: config.app.logglySubdomain!,
-        tags: ['express-server'],
+        tags: [config.app.serverName],
         json: true,
     })
 );
 
-const logger = (level: string, message: string | object) => {
+const sendLog = async (level: string, message: string | object) => {
+    // do not log if there is no loggly config found
     if (!config.app.logglyApiKey) return;
+    // log debug and info only in development
+    if (env !== 'development' && ['debug', 'info'].includes(level)) return;
+
     winston.log(level, {
         env: config.app.env,
         message: message,
@@ -20,10 +28,27 @@ const logger = (level: string, message: string | object) => {
     });
 };
 
-export default logger;
+const getLogs = async (res: Response, howFarBack: string = '1d') => {
+    const client = axios.create({
+        auth: {
+            username: logglyUsername!,
+            password: logglyPassword!,
+        },
+    });
 
-// logger('critical', 'example error log');
-// logger('error', 'example error log');
-// logger('warn', 'example warning log');
-// logger('info', 'example info log');
+    try {
+        const response = await client.get(
+            `https://${logglySubdomain}.loggly.com/apiv2/events/iterate?q=*&from=-${howFarBack}&until=now&size=100`
+        );
+        res.send(response.data);
+    } catch (error) {
+        res.boom.badRequest(error);
+    }
+};
+
+export default { sendLog, getLogs };
+
 // logger('debug', 'example debug log');
+// logger('info', 'example info log');
+// logger('warn', 'example warning log');
+// logger('error', 'example error log');

@@ -11,7 +11,7 @@ import api from './api';
 // base routes for the server
 
 export default (app: Application) => {
-    app.use(cors());
+    // app.use(cors());
 
     app.use(services.responseTime);
 

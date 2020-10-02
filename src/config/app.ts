@@ -7,6 +7,8 @@ const app = {
     apiKey: process.env.API_KEY,
     logglyApiKey: process.env.LOGGLY_API_KEY,
     logglySubdomain: process.env.LOGGLY_SUBDOMAIN,
+    logglyUsername: process.env.LOGGLY_USERNAME,
+    logglyPassword: process.env.LOGGLY_PASSWORD,
     serverName: process.env.SERVER_NAME || 'api-server-fms',
 };
 

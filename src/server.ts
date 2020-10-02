@@ -2,10 +2,8 @@ import chalk from 'chalk';
 import config from './config';
 import routes from './routes';
 import app from './app';
-import services from './services';
 const { connect } = require('marpat');
 const { port, env, datastore } = config.app;
-const { logger } = services;
 
 console.clear();
 
