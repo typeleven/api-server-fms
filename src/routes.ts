@@ -2,16 +2,15 @@ import config from './config';
 import services from './services';
 import { Application } from 'express';
 import cors from 'cors';
+import api from './api';
 
 const { errors } = services.validation;
 const { rateLimiterGlobal } = services.rateLimit;
 
-import api from './api';
-
 // base routes for the server
 
 export default (app: Application) => {
-    // app.use(cors());
+    app.use(cors());
 
     app.use(services.responseTime);
 
