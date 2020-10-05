@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import config from '../config';
 import chalk from 'chalk';
 
-const connectDB = async () => {
+const mongoConnect = async () => {
     // connect mongoose to mongodb if there is a mongodb connection string
     if (config.app.dbDatastore?.startsWith('mongodb')) {
         try {
@@ -24,4 +24,4 @@ const connectDB = async () => {
     }
 };
 
-export default connectDB;
+export default { mongoConnect };

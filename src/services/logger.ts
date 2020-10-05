@@ -29,6 +29,8 @@ const sendLog = async (level: string, message: string | object) => {
 };
 
 const getLogs = async (res: Response, howFarBack: string = '1d') => {
+    if (!config.app.logglyApiKey)
+        return res.boom.badRequest('Logging is not setup on this server.');
     const client = axios.create({
         auth: {
             username: logglyUsername!,
