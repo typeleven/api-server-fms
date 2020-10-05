@@ -9,8 +9,6 @@ axiosCookieJarSupport(axios);
 const cookieJar = new tough.CookieJar();
 const instance = axios.create();
 
-const { filemaker } = config;
-
 const pipeContainerUrl = async (url: string, res: Response) => {
     try {
         const response = await instance.get(url, {
@@ -27,12 +25,12 @@ const pipeContainerUrl = async (url: string, res: Response) => {
 const addFmsClient: RequestHandler = async (req: any, res, next) => {
     try {
         let client = await Filemaker.findOne({
-            'agent.connection.server': filemaker.server,
-            'agent.connection.database': filemaker.database,
+            'agent.connection.server': config.filemaker.server,
+            'agent.connection.database': config.filemaker.database,
         });
 
         if (!client) {
-            client = await Filemaker.create(filemaker);
+            client = await Filemaker.create(config.filemaker);
             await client.save();
         }
 

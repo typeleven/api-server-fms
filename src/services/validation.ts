@@ -3,7 +3,7 @@ import { ErrorRequestHandler } from 'express';
 
 const errors: ErrorRequestHandler = (err, req, res, next) => {
     if (!isCelebrateError(err)) {
-        return res.boom.badRequest();
+        return res.boom.badRequest(err.message);
     }
 
     let message;
