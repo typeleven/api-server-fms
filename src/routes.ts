@@ -16,7 +16,7 @@ export default (app: Application) => {
 
     app.use('/api', api);
 
-    app.use('/', (req, res) => res.send({ message: 'API Server' }));
+    // app.use('/', (req, res) => res.send({ message: 'API Server' }));
 
     config.app.env !== 'development'
         ? app.use(rateLimiterGlobal)
