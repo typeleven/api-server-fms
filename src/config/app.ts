@@ -9,6 +9,12 @@ const app = {
 
     apiKey: process.env.API_KEY,
 
+    tokenSecret: process.env.SECRET_TOKEN,
+    tokenExpiresIn: process.env.EXPIRES_IN_TOKEN,
+
+    refreshSecret: process.env.SECRET_REFRESH,
+    refreshExpiresIn: process.env.EXPIRES_IN_REFRESH,
+
     logglyApiKey: process.env.LOGGLY_API_KEY,
     logglySubdomain: process.env.LOGGLY_SUBDOMAIN,
     logglyUsername: process.env.LOGGLY_USERNAME,

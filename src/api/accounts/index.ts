@@ -1,6 +1,8 @@
 import express from 'express';
 import controllers from '../../controllers';
 import asyncHandler from 'express-async-handler';
+import services from '../../services';
+import { AccountInterface } from '../../models/accounts';
 const router = express.Router();
 
 router.post(
@@ -47,11 +49,14 @@ router.delete(
 router.post(
     '/login',
     asyncHandler(async (req, res) => {
-        const result = await controllers.accounts.login(
+        const account: AccountInterface = await controllers.accounts.login(
             req.body.username,
             req.body.password
         );
-        res.send({ message: 'success' });
+        res.send({
+            token: services.auth.createAuthToken(account),
+            refresh: services.auth.createRefreshToken(account),
+        });
     })
 );
 
