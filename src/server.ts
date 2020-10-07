@@ -3,7 +3,7 @@ import config from './config';
 import routes from './routes';
 import app from './app';
 import services from './services';
-const { port, env, fmsDatastore } = config.app;
+const { port, env } = config.app;
 
 console.clear();
 

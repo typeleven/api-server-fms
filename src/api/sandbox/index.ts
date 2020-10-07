@@ -1,12 +1,14 @@
 import express, { RequestHandler } from 'express';
+import services from '../../services';
 import fms from './fms';
 import db from './db';
 import { celebrate, Joi } from 'celebrate';
+import controllers from '../../controllers';
 
 const router = express.Router();
 
-const response: RequestHandler = (req, res) =>
-    res.json({ message: 'Validation Passed' });
+const response: RequestHandler = (req: any, res) =>
+    res.json({ message: 'Test Passed' });
 
 router.use('/fms', fms);
 router.use('/db', db);
@@ -28,6 +30,14 @@ router.post(
         },
     }),
     response
+);
+
+router.get('/basicAuth', services.auth.validation, response);
+router.get(
+    '/attachUser',
+    services.auth.validation,
+    controllers.accounts.attachAccount,
+    (req: any, res) => res.send(req.account)
 );
 
 export default router;
