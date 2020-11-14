@@ -6,14 +6,15 @@ import { Response } from 'express';
 
 const { logglyUsername, logglyPassword, logglySubdomain, env } = config.app;
 
-winston.add(
-    new Loggly({
-        token: config.app.logglyApiKey!,
-        subdomain: config.app.logglySubdomain!,
-        tags: [config.app.serverName],
-        json: true,
-    })
-);
+if (config.app.logglyApiKey)
+    winston.add(
+        new Loggly({
+            token: config.app.logglyApiKey!,
+            subdomain: config.app.logglySubdomain!,
+            tags: [config.app.serverName],
+            json: true,
+        })
+    );
 
 const sendLog = async (level: string, message: string | object) => {
     // do not log if there is no loggly config found
