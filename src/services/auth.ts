@@ -6,8 +6,10 @@ import { AccountInterface } from '../models/accounts';
 const { app } = config;
 
 const validation: RequestHandler = (req: any, res, next) => {
-    if (req.headers['x-api-key'] === app.apiKey) return next();
-    if (req.query['x-api-key'] === app.apiKey) return next();
+    const apiKeys = [...app.apiKeyArray, app.apiKey];
+
+    if (apiKeys.includes(req.headers['x-api-key'])) return next();
+    if (apiKeys.includes(req.query['x-api-key'])) return next();
 
     if (req.headers.authorization) {
         let token;

@@ -9,6 +9,8 @@ const app = {
 
     apiKey: process.env.API_KEY,
 
+    apiKeyArray: JSON.parse(process.env.API_KEY_ARRAY || '[]'),
+
     tokenSecret: process.env.SECRET_TOKEN,
     tokenExpiresIn: process.env.EXPIRES_IN_TOKEN,
 
