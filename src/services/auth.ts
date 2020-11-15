@@ -10,6 +10,8 @@ const validation: RequestHandler = (req: any, res, next) => {
 
     if (apiKeys.includes(req.headers['x-api-key'])) return next();
     if (apiKeys.includes(req.query['x-api-key'])) return next();
+    if (req.headers['x-api-key'] || req.query['x-api-key'])
+        return res.boom.unauthorized();
 
     if (req.headers.authorization) {
         let token;

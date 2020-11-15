@@ -6,10 +6,13 @@ const s3 = new aws.S3(config.aws.credentials);
 const uploadToS3 = async (
     file: any,
     dir: string,
-    bucket: string
+    bucket: string,
+    filename: string
 ): Promise<any> => {
     try {
-        const key = `${dir}/${file.originalname}`;
+        const key = filename
+            ? `${dir}/${filename}`
+            : `${dir}/${file.originalname}`;
         await s3
             .putObject({
                 Bucket: bucket,
@@ -43,10 +46,15 @@ const get = async (key: any, bucket: string, VersionId?: any) => {
         throw new Error(error.message);
     }
 };
-const upload = async (file: any, dir: string, bucket: string) => {
+const upload = async (
+    file: any,
+    dir: string,
+    bucket: string,
+    filename: string
+) => {
     try {
         // console.log(file);
-        const result = await uploadToS3(file, dir, bucket);
+        const result = await uploadToS3(file, dir, bucket, filename);
         return result;
     } catch (error) {
         throw new Error(error.message);
