@@ -54,6 +54,7 @@ const upload = async (
 ) => {
     try {
         // console.log(file);
+        filename = filename.replace(/ /g, '-');
         const result = await uploadToS3(file, dir, bucket, filename);
         return result;
     } catch (error) {
