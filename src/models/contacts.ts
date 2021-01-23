@@ -7,6 +7,10 @@ const contactSchema = new Schema(
         email: String,
         phone: String,
         city: String,
+        attachment: {
+            type: Schema.Types.ObjectId,
+            ref: 'Attachment',
+        },
     },
     { timestamps: true }
 );

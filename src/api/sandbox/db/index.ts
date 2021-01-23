@@ -1,6 +1,7 @@
 import express from 'express';
 import controllers from '../../../controllers';
 import asyncHandler from 'express-async-handler';
+import { celebrate, Joi } from 'celebrate';
 const router = express.Router();
 
 router.post(
@@ -8,6 +9,14 @@ router.post(
     asyncHandler(async (req, res) => {
         const contact = await controllers.contacts.create(req.body);
         res.send(contact);
+    })
+);
+
+router.get(
+    '/contact',
+    asyncHandler(async (req, res) => {
+        const result = await controllers.contacts.list();
+        result ? res.send(result) : res.boom.badRequest(`No Contacts Found`);
     })
 );
 
@@ -41,6 +50,30 @@ router.delete(
         result
             ? res.send({ message: 'Contact Deleted' })
             : res.boom.badRequest(`No Contact found with _id ${req.params.id}`);
+    })
+);
+
+router.post(
+    '/attachment',
+    celebrate({
+        body: {
+            name: Joi.string().required(),
+            type: Joi.string().required(),
+            uri: Joi.string().required(),
+            contact: Joi.string().required(),
+        },
+    }),
+    asyncHandler(async (req, res) => {
+        const attachment = await controllers.attachments.create(req.body);
+        res.send(attachment);
+    })
+);
+
+router.get(
+    '/attachment',
+    asyncHandler(async (req, res) => {
+        const result = await controllers.attachments.list();
+        result ? res.send(result) : res.boom.badRequest(`No Attachments Found`);
     })
 );
 

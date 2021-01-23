@@ -1,10 +1,10 @@
-import Contact from '../models/contacts';
+import Attachment from '../models/attachments';
 
 const create = async (data: object) => {
     try {
-        const contact = new Contact(data);
-        await contact.save();
-        return contact;
+        const attachment = new Attachment(data);
+        await attachment.save();
+        return attachment;
     } catch (error) {
         throw new Error(error);
     }
@@ -12,7 +12,7 @@ const create = async (data: object) => {
 
 const get = async (_id: string) => {
     try {
-        const result = await Contact.findOne({ _id });
+        const result = await Attachment.findOne({ _id });
         return result;
     } catch (error) {
         throw new Error(error);
@@ -21,7 +21,7 @@ const get = async (_id: string) => {
 
 const list = async () => {
     try {
-        const result = await Contact.find({});
+        const result = await Attachment.find({}).populate('contact');
         return result;
     } catch (error) {
         throw new Error(error);
@@ -30,8 +30,8 @@ const list = async () => {
 
 const update = async (_id: string, data: object) => {
     try {
-        const update = await Contact.findOneAndUpdate({ _id }, data);
-        const result = await Contact.findOne({ _id });
+        const update = await Attachment.findOneAndUpdate({ _id }, data);
+        const result = await Attachment.findOne({ _id });
         return result;
     } catch (error) {
         throw new Error(error);
@@ -40,7 +40,7 @@ const update = async (_id: string, data: object) => {
 
 const remove = async (_id: string) => {
     try {
-        const result = await Contact.findOneAndDelete({ _id });
+        const result = await Attachment.findOneAndDelete({ _id });
         return result;
     } catch (error) {
         throw new Error(error);
