@@ -77,4 +77,17 @@ router.get(
     })
 );
 
+router.patch(
+    '/attachment/:id',
+    asyncHandler(async (req, res) => {
+        const result = await controllers.attachments.update(
+            req.params.id,
+            req.body
+        );
+        result
+            ? res.send(result)
+            : res.boom.badRequest(`No Contact found with _id ${req.params.id}`);
+    })
+);
+
 export default router;

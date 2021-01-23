@@ -7,13 +7,19 @@ const contactSchema = new Schema(
         email: String,
         phone: String,
         city: String,
-        attachment: {
-            type: Schema.Types.ObjectId,
-            ref: 'Attachment',
-        },
     },
     { timestamps: true }
 );
+
+contactSchema.virtual('attachments', {
+    ref: 'Attachment',
+    localField: '_id',
+    foreignField: 'contact',
+    justOne: false,
+});
+
+contactSchema.set('toObject', { virtuals: true });
+contactSchema.set('toJSON', { virtuals: true });
 
 const Contact = model('Contact', contactSchema);
 

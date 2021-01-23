@@ -12,7 +12,7 @@ const create = async (data: object) => {
 
 const get = async (_id: string) => {
     try {
-        const result = await Contact.findOne({ _id });
+        const result = await Contact.findOne({ _id }).populate('attachments');
         return result;
     } catch (error) {
         throw new Error(error);
