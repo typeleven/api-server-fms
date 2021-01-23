@@ -23,6 +23,4 @@ export default (app: Application) => {
         : console.log('🚀 Rate Limiter Disabled');
 
     app.use(errors);
-
-    app.use((req, res) => res.boom.notFound());
 };
