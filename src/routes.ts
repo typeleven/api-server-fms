@@ -4,7 +4,7 @@ import { Application } from 'express';
 import cors from 'cors';
 import api from './api';
 
-const { errors } = services.validation;
+const { handleErrors } = services.validation;
 const { rateLimiterGlobal } = services.rateLimit;
 
 // base routes for the server
@@ -16,11 +16,9 @@ export default (app: Application) => {
 
     app.use('/api', api);
 
-    // app.use('/', (req, res) => res.send({ message: 'API Server' }));
+    app.use(handleErrors);
 
     config.app.env !== 'development'
         ? app.use(rateLimiterGlobal)
         : console.log('🚀 Rate Limiter Disabled');
-
-    app.use(errors);
 };

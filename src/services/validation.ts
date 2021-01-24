@@ -1,7 +1,17 @@
-import { isCelebrateError } from 'celebrate';
-import { ErrorRequestHandler } from 'express';
+import { isCelebrateError, Joi } from 'celebrate';
+import { ErrorRequestHandler, RequestHandler } from 'express';
+import { validationResult } from 'express-validator';
 
-const errors: ErrorRequestHandler = (err, req, res, next) => {
+const handleValidation: RequestHandler = (req, res, next) => {
+    // Finds the validation errors in this request and wraps them in an object with handy functions
+    const err = validationResult(req);
+    if (!err.isEmpty()) {
+        return res.status(400).send({ errors: err.array() });
+    }
+    next();
+};
+
+const handleErrors: ErrorRequestHandler = (err, req, res, next) => {
     if (!isCelebrateError(err)) {
         return res.boom.badRequest(err.message);
     }
@@ -37,4 +47,6 @@ const errors: ErrorRequestHandler = (err, req, res, next) => {
     return res.boom.badRequest(message, { location });
 };
 
-export default { errors };
+const ObjectId = Joi.string().regex(/^[0-9a-fA-F]{24}$/, '"valid mongo id"');
+
+export default { handleErrors, handleValidation, ObjectId };

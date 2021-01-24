@@ -1,8 +1,11 @@
 import express from 'express';
 import controllers from '../../../controllers';
 import asyncHandler from 'express-async-handler';
+import services from '../../../services';
 import { celebrate, Joi } from 'celebrate';
+
 const router = express.Router();
+const { ObjectId } = services.validation;
 
 router.post(
     '/contact',
@@ -60,14 +63,7 @@ router.post(
             name: Joi.string().required(),
             type: Joi.string().required(),
             uri: Joi.string().required(),
-            contact: Joi.array()
-                .required()
-                .items(
-                    Joi.string().length(24).alphanum().messages({
-                        'string.length': 'contact must be an ObjectId',
-                        'string.alphanum': 'contact must be an ObjectId',
-                    })
-                ),
+            contact: Joi.array().required().items(ObjectId),
         },
     }),
     asyncHandler(async (req, res) => {
