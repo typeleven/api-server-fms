@@ -60,7 +60,14 @@ router.post(
             name: Joi.string().required(),
             type: Joi.string().required(),
             uri: Joi.string().required(),
-            contact: Joi.array().required(),
+            contact: Joi.array()
+                .required()
+                .items(
+                    Joi.string().length(24).alphanum().messages({
+                        'string.length': 'contact must be an ObjectId',
+                        'string.alphanum': 'contact must be an ObjectId',
+                    })
+                ),
         },
     }),
     asyncHandler(async (req, res) => {
