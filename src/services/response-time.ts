@@ -23,4 +23,4 @@ const requestTimeLogger = compose([
     }),
 ]);
 
-export default requestTimeLogger;
+export default { requestTimeLogger };

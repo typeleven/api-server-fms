@@ -4,6 +4,7 @@ import { Application } from 'express';
 import cors from 'cors';
 import api from './api';
 
+const { requestTimeLogger } = services.responseTime;
 const { handleErrors } = services.validation;
 const { rateLimiterGlobal } = services.rateLimit;
 
@@ -12,7 +13,7 @@ const { rateLimiterGlobal } = services.rateLimit;
 export default (app: Application) => {
     app.use(cors());
 
-    app.use(services.responseTime);
+    app.use(requestTimeLogger);
 
     app.use('/api', api);
 
