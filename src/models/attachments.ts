@@ -5,10 +5,12 @@ const attachmentSchema = new Schema(
         name: String,
         type: String,
         uri: String,
-        contact: {
-            type: Schema.Types.ObjectId,
-            ref: 'Contact',
-        },
+        contact: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Contact',
+            },
+        ],
     },
     { timestamps: true }
 );

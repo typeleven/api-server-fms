@@ -60,7 +60,7 @@ router.post(
             name: Joi.string().required(),
             type: Joi.string().required(),
             uri: Joi.string().required(),
-            contact: Joi.string().required(),
+            contact: Joi.array().required(),
         },
     }),
     asyncHandler(async (req, res) => {

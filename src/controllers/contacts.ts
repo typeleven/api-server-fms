@@ -21,7 +21,7 @@ const get = async (_id: string) => {
 
 const list = async () => {
     try {
-        const result = await Contact.find({});
+        const result = await Contact.find({}).populate('attachments');
         return result;
     } catch (error) {
         throw new Error(error);
