@@ -12,7 +12,7 @@ const attachmentSchema = new Schema(
             },
         ],
     },
-    { timestamps: true }
+    { timestamps: true, id: false }
 );
 
 const Attachment = model('Attachment', attachmentSchema);

@@ -1,13 +1,15 @@
-import Contact from '../models/contacts.model';
+import { contacts } from '../models';
 
-const create = async (data: object) => await Contact.create(data);
+const create = async (data: object) => await contacts.create(data);
 
-const get = async (_id: string) => await Contact.get(_id, 'attachments');
+const get = async (_id: string) => await contacts.get(_id, 'attachments');
 
-const list = async () => await Contact.list('attachments');
+const list = async (req) => await contacts.list(req);
 
-const update = async (_id: string, data: object) => Contact.update(_id, data);
+const search = async (req) => await contacts.search(req);
 
-const remove = async (_id: string) => await Contact.remove(_id);
+const update = async (_id: string, data: object) => contacts.update(_id, data);
 
-export default { create, remove, update, get, list };
+const remove = async (_id: string) => await contacts.remove(_id);
+
+export default { create, remove, update, get, list, search };

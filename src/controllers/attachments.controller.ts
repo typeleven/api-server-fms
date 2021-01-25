@@ -1,14 +1,14 @@
-import Attachment from '../models/attachments.model';
+import { attachments } from '../models';
 
-const create = async (data: object) => await Attachment.create(data);
+const create = async (data: object) => await attachments.create(data);
 
-const get = async (_id: string) => await Attachment.get(_id, 'contact');
+const get = async (_id: string) => await attachments.get(_id, 'contact');
 
-const list = async () => await Attachment.list('contact');
+const list = async () => await attachments.list('contact');
 
 const update = async (_id: string, data: object) =>
-    Attachment.update(_id, data);
+    attachments.update(_id, data);
 
-const remove = async (_id: string) => await Attachment.remove({ _id });
+const remove = async (_id: string) => await attachments.remove(_id);
 
 export default { create, remove, update, get, list };

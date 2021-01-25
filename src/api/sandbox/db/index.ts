@@ -15,10 +15,18 @@ router.post(
     })
 );
 
+router.post(
+    '/contact/search',
+    asyncHandler(async (req, res) => {
+        const contact = await controllers.contacts.search(req);
+        res.send(contact);
+    })
+);
+
 router.get(
     '/contact',
     asyncHandler(async (req, res) => {
-        const result = await controllers.contacts.list();
+        const result = await controllers.contacts.list(req);
         result ? res.send(result) : res.boom.badRequest(`No Contacts Found`);
     })
 );
