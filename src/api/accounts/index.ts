@@ -2,7 +2,7 @@ import express from 'express';
 import controllers from '../../controllers';
 import asyncHandler from 'express-async-handler';
 import services from '../../services';
-import { AccountInterface } from '../../models/accounts';
+import { AccountInterface } from '../../models/accounts.model';
 import config from '../../config';
 const router = express.Router();
 

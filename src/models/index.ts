@@ -1,7 +1,7 @@
 // @index: import ${variable} from ${relpath};
-import accounts from './accounts';
-import attachments from './attachments';
-import contacts from './contacts';
+import accounts from './accounts.model';
+import attachments from './attachments.model';
+import contacts from './contacts.model';
 // /index
 
 export default {

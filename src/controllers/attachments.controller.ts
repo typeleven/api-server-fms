@@ -1,4 +1,4 @@
-import Attachment from '../models/attachments';
+import Attachment from '../models/attachments.model';
 
 const create = async (data: object) => await Attachment.create(data);
 
