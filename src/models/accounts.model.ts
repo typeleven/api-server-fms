@@ -14,7 +14,7 @@ const schema = new Schema(
     { timestamps: true }
 );
 
-export interface Account extends Document {
+export interface AccountInterface extends Document {
     first: string;
     last: string;
     username: string;
@@ -24,7 +24,7 @@ export interface Account extends Document {
     permissions: string[];
 }
 
-schema.pre<Account>('save', async function () {
+schema.pre<AccountInterface>('save', async function () {
     if (this.isModified('password')) {
         const salt = await bcrypt.genSalt(10);
         this.password = await bcrypt.hash(this.password, salt);
@@ -37,6 +37,6 @@ schema.pre<Account>('save', async function () {
     }
 });
 
-const Account = model<Account>('Account', schema);
+const Account = model<AccountInterface>('Account', schema);
 
 export default Account;
