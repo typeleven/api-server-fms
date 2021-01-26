@@ -12,7 +12,6 @@ const getOptions = (req: Request) => {
         'page',
         'populate',
     ]);
-    console.log(result);
     return result;
 };
 
