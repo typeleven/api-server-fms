@@ -28,6 +28,10 @@ contactSchema.set('toJSON', { virtuals: true });
 
 const Contact = model('Contact', contactSchema);
 
+// TODO Delete Multiple with ID List
+
+// TODO Create Multiple by sending an array. Must be ACID?
+
 const get = (_id: string, populate?: string | object) =>
     Contact.findOne({ _id }).populate(populate);
 
