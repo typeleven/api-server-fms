@@ -14,6 +14,13 @@ router.post(
         res.send(contact);
     })
 );
+router.post(
+    '/contacts',
+    asyncHandler(async (req, res) => {
+        const contact = await controllers.contacts.createMany(req.body);
+        res.send(contact);
+    })
+);
 
 router.post(
     '/contact/search',

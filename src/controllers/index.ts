@@ -1,13 +1,13 @@
-// @index: export { default as ${variable} } from './${variable}.controller';
-export { default as accounts } from './accounts.controller';
-export { default as attachments } from './attachments.controller';
-export { default as contacts } from './contacts.controller';
+// @index: export { default as ${variable} } from './${variable}';
+export { default as accounts } from './accounts';
+export { default as attachments } from './attachments';
+export { default as contacts } from './contacts';
 // /index
 
-// @index: import ${variable} from './${variable}.controller';
-import accounts from './accounts.controller';
-import attachments from './attachments.controller';
-import contacts from './contacts.controller';
+// @index: import ${variable} from './${variable}';
+import accounts from './accounts';
+import attachments from './attachments';
+import contacts from './contacts';
 // /index
 
 export default {

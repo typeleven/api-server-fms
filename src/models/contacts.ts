@@ -26,11 +26,9 @@ contactSchema.plugin(mongoosePaginate);
 contactSchema.set('toObject', { virtuals: true });
 contactSchema.set('toJSON', { virtuals: true });
 
-const Contact = model('Contact', contactSchema);
+const Contact: any = model('Contact', contactSchema);
 
 // TODO Delete Multiple with ID List
-
-// TODO Create Multiple by sending an array. Must be ACID?
 
 const get = (_id: string, populate?: string | object) =>
     Contact.findOne({ _id }).populate(populate);
@@ -48,9 +46,11 @@ const search = async (req: Request) => {
 
 const create = (data: object) => new Contact(data).save();
 
+const createMany = (data: object[]) => Contact.insertMany(data);
+
 const update = (_id: string, data: object) =>
     Contact.findByIdAndUpdate(_id, data, { new: true });
 
 const remove = (_id: string) => Contact.findOneAndDelete({ _id });
 
-export default { get, list, search, create, update, remove };
+export default { get, list, search, create, update, remove, createMany };
