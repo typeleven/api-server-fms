@@ -1,6 +1,6 @@
 import express from 'express';
 import health from './health';
-import validation from '../services/validation';
+import { validation } from '../services';
 import logs from './logs';
 import accounts from './accounts';
 import sandbox from './sandbox';
