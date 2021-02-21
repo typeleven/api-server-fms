@@ -1,7 +1,7 @@
 import { RequestHandler } from 'express';
 import config from '../config';
 import jwt from 'jsonwebtoken';
-import { AccountInterface } from '../models/accounts.model';
+import { AccountInterface } from '../models/accounts';
 
 const { app } = config;
 

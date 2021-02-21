@@ -7,9 +7,9 @@ import next from 'next';
 const { port, env } = config.app;
 const dev = env === 'development';
 const nextApp = next({ dev });
-const handle = nextApp.getRequestHandler();
+const handler = nextApp.getRequestHandler();
 
-console.clear();
+// console.clear();
 
 routes(app);
 
@@ -21,7 +21,7 @@ const start = async () => {
     await services.filemaker.marpatConnect();
 
     app.all('*', (req, res) => {
-        return handle(req, res);
+        return handler(req, res);
     });
 
     // start the express server

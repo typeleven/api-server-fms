@@ -1,4 +1,4 @@
-import Account, { AccountInterface } from '../models/accounts.model';
+import Account, { AccountInterface } from '../models/accounts';
 import bcrypt from 'bcrypt';
 import auth from '../services/auth';
 import { RequestHandler, Response } from 'express';
