@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .bg-primary-main {
+        @apply bg-blue-600 dark:bg-blue-900;
+    }
+    .bg-primary-darker {
+        @apply bg-blue-700 dark:bg-blue-500;
+    }
+    .bg-primary-lighter {
+        @apply bg-blue-500 dark:bg-blue-700;
+    }
+    .bg-primary-hover {
+        @apply hover:bg-blue-500  dark:hover:bg-blue-700;
+    }
+}
+
+@layer components {
+    .btn {
+        @apply block
+        px-3
+        py-2
+        rounded-md
+        text-base
+        font-medium;
+    }
+    .btn-nav-menu-active {
+        @apply btn 
+        bg-primary-darker
+        text-white;
+    }
+    .btn-nav-menu {
+        @apply btn
+        text-gray-300
+        hover:text-white
+        bg-primary-hover;
+    }
+
+    .btn-nav-active {
+        @apply btn
+        bg-primary-darker
+        text-white;
+    }
+    .btn-nav {
+        @apply btn
+        text-gray-300
+        hover:text-white
+        bg-primary-hover;
+    }
+    .container-main {
+        @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-screen;
+    }
+    .menu-item {
+        @apply dark:text-white block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-900;
+    }
+}
