@@ -29,7 +29,6 @@ export default function Toggle(props) {
                 aria-labelledby="annual-billing-label"
                 onClick={onClick}
             >
-                <span className="sr-only">Use setting</span>
                 <span
                     aria-hidden="true"
                     className={

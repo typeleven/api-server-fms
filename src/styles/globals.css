@@ -4,7 +4,7 @@
 
 @layer components {
     .bg-primary-main {
-        @apply bg-blue-600 dark:bg-blue-900;
+        @apply bg-primary dark:bg-blue-900;
     }
     .bg-primary-darker {
         @apply bg-blue-700 dark:bg-blue-500;
@@ -24,29 +24,24 @@
         py-2
         rounded-md
         text-base
-        font-medium;
+        font-medium
+        text-white;
     }
     .btn-nav-menu-active {
         @apply btn 
-        bg-primary-darker
-        text-white;
+        bg-primary-darker;
     }
     .btn-nav-menu {
         @apply btn
-        text-gray-300
-        hover:text-white
         bg-primary-hover;
     }
 
     .btn-nav-active {
         @apply btn
-        bg-primary-darker
-        text-white;
+        bg-primary-darker;
     }
     .btn-nav {
         @apply btn
-        text-gray-300
-        hover:text-white
         bg-primary-hover;
     }
     .container-main {

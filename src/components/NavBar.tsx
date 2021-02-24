@@ -1,7 +1,8 @@
 import { useTheme } from 'next-themes';
 import { Transition } from '@headlessui/react';
 import React, { useState } from 'react';
-import { UiToggle } from './';
+import { ui } from './';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 export default function NavBar() {
     const { theme, setTheme } = useTheme();
@@ -114,41 +115,40 @@ export default function NavBar() {
                                 leaveFrom="transform opacity-100 scale-100"
                                 leaveTo="transform opacity-0 scale-95"
                             >
-                                <div
-                                    className="dark:bg-gray-900 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5"
-                                    role="menu"
-                                    aria-orientation="vertical"
-                                    aria-labelledby="user-menu"
+                                <ClickAwayListener
+                                    onClickAway={() =>
+                                        setAccountMenuIsOpen(false)
+                                    }
                                 >
-                                    <a
-                                        href="/"
-                                        className="menu-item"
-                                        role="menuitem"
+                                    <div
+                                        className="dark:bg-gray-900 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5"
+                                        role="menu"
+                                        aria-orientation="vertical"
+                                        aria-labelledby="user-menu"
                                     >
-                                        Your Profile
-                                    </a>
-                                    <a
-                                        href="/"
-                                        className="menu-item"
-                                        role="menuitem"
-                                    >
-                                        Settings
-                                    </a>
-                                    <a
-                                        href="/"
-                                        className="menu-item"
-                                        role="menuitem"
-                                    >
-                                        Sign out
-                                    </a>
-                                    <div className="menu-item">
-                                        <UiToggle
-                                            text={
-                                                theme === 'dark'
-                                                    ? 'Dark Mode'
-                                                    : 'Light Mode'
-                                            }
-                                            active={theme === 'dark'}
+                                        <a
+                                            href="/"
+                                            className="menu-item"
+                                            role="menuitem"
+                                        >
+                                            Your Profile
+                                        </a>
+                                        <a
+                                            href="/"
+                                            className="menu-item"
+                                            role="menuitem"
+                                        >
+                                            Settings
+                                        </a>
+                                        <a
+                                            href="/"
+                                            className="menu-item"
+                                            role="menuitem"
+                                        >
+                                            Sign out
+                                        </a>
+                                        <div
+                                            className="menu-item cursor-pointer"
                                             onClick={() =>
                                                 setTheme(
                                                     theme === 'dark'
@@ -156,9 +156,18 @@ export default function NavBar() {
                                                         : 'dark'
                                                 )
                                             }
-                                        />
+                                        >
+                                            <ui.Toggle
+                                                text={
+                                                    theme === 'dark'
+                                                        ? 'Dark Mode'
+                                                        : 'Light Mode'
+                                                }
+                                                active={theme === 'dark'}
+                                            />
+                                        </div>
                                     </div>
-                                </div>
+                                </ClickAwayListener>
                             </Transition>
                         </div>
                     </div>
